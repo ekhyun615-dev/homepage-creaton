@@ -1,0 +1,66 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'CREATON Korea | 독일 프리미엄 점토기와',
+  description = '130년 전통의 독일 CREATON 정품 점토기와. 평면기와·전통기와·색상/마감 등 다양한 프리미엄 지붕재를 한국 공식 파트너가 공급합니다.',
+  image = '/images/og-default.jpg',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph / 카카오톡·페이스북 공유 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CREATON Korea" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site).href} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="ko_KR" />
+
+    <!-- 네이버 웹마스터도구 사이트 소유확인 (발급 후 값 교체) -->
+    <!-- <meta name="naver-site-verification" content="여기에_발급받은_값" /> -->
+    <!-- 구글 서치콘솔 소유확인 (발급 후 값 교체) -->
+    <!-- <meta name="google-site-verification" content="여기에_발급받은_값" /> -->
+
+    <meta name="theme-color" content="#c8102e" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- 조직 구조화 데이터(검색 노출용) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'CREATON Korea',
+      url: 'https://www.creaton.kr',
+      description: description,
+      areaServed: 'KR',
+    })} />
+  </head>
+  <body>
+    <a href="#main" class="sr-only">본문 바로가기</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

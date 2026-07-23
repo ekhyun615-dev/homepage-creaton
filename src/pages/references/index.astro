@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const references = (await getCollection('references', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="시공 사례 | CREATON Korea"
+  description="독일 CREATON 점토기와로 완성한 국내 시공 사례. 전원주택, 단독주택, 상업 건물 등 실제 프로젝트를 확인하세요."
+>
+  <section class="page-hero bg-ink">
+    <div class="container">
+      <span class="eyebrow" style="color:#ff9aa8">REFERENCES</span>
+      <h1>시공 사례</h1>
+      <p class="lead" style="color:rgba(255,255,255,.82)">
+        CREATON 기와로 완성된 지붕. 실제 시공 현장을 통해 마감과 색상을 확인해 보세요.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {references.length > 0 ? (
+        <div class="grid grid-3">
+          {references.map((r) => (
+            <a href={`/references/${r.slug}`} class="card ref-card">
+              <div class="card-media" style={r.data.image ? `background-image:url(${r.data.image})` : ''}>
+                {!r.data.image && <span class="ph">이미지 준비중</span>}
+              </div>
+              <div class="card-body">
+                <h3>{r.data.title}</h3>
+                <p class="ref-meta">{[r.data.location, r.data.buildingType, r.data.product].filter(Boolean).join(' · ')}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="lead">시공 사례를 준비하고 있습니다.</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero { padding-block: clamp(56px, 9vw, 96px); }
+  .page-hero h1 { color: #fff; font-size: clamp(1.8rem, 5vw, 2.8rem); }
+  .card-media {
+    aspect-ratio: 4 / 3;
+    background: var(--c-bg-clay) center/cover no-repeat;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-media .ph { color: var(--c-muted); font-size: 0.85rem; }
+  .card-body { padding: 18px 20px 22px; }
+  .card-body h3 { font-size: 1.1rem; margin: 0 0 6px; }
+  .ref-meta { color: var(--c-muted); font-size: 0.88rem; margin: 0; }
+</style>

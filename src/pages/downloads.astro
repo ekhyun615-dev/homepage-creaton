@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// TODO: 실제 카탈로그/시공가이드 PDF를 public/downloads/ 에 넣고 아래 목록을 교체하세요.
+const files = [
+  { title: 'CREATON 제품 카탈로그', desc: '전체 기와 라인업 및 색상 안내', size: 'PDF · 준비중', href: '#' },
+  { title: '시공 가이드', desc: '지붕 시공 표준 및 시공 디테일', size: 'PDF · 준비중', href: '#' },
+  { title: '제품 규격서', desc: '치수·중량·기술 사양', size: 'PDF · 준비중', href: '#' },
+];
+---
+
+<BaseLayout
+  title="기술자료 | CREATON Korea"
+  description="CREATON 제품 카탈로그, 시공 가이드, 규격서 등 기술자료 다운로드."
+>
+  <section class="page-hero bg-ink">
+    <div class="container">
+      <span class="eyebrow" style="color:#ff9aa8">DOWNLOADS</span>
+      <h1>기술자료</h1>
+      <p class="lead" style="color:rgba(255,255,255,.82)">
+        제품 카탈로그와 시공 가이드, 규격서를 다운로드하실 수 있습니다.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <ul class="file-list">
+        {files.map((f) => (
+          <li>
+            <a href={f.href} class="file-row" download>
+              <div class="file-icon">PDF</div>
+              <div class="file-info">
+                <strong>{f.title}</strong>
+                <span>{f.desc}</span>
+              </div>
+              <span class="file-size">{f.size}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="note">※ 원하시는 자료가 없으신가요? <a href="/contact">문의하기</a>를 통해 요청해 주세요.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero { padding-block: clamp(56px, 9vw, 96px); }
+  .page-hero h1 { color: #fff; font-size: clamp(1.8rem, 5vw, 2.8rem); }
+  .narrow { max-width: 760px; }
+  .file-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .file-row {
+    display: flex; align-items: center; gap: 18px;
+    padding: 18px 20px;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    background: #fff;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .file-row:hover { border-color: var(--c-red); box-shadow: var(--shadow-sm); }
+  .file-icon {
+    flex: none;
+    width: 46px; height: 46px;
+    display: grid; place-items: center;
+    background: #fdecef; color: var(--c-red);
+    font-weight: 700; font-size: 0.75rem;
+    border-radius: var(--radius);
+  }
+  .file-info { flex: 1; }
+  .file-info strong { display: block; font-size: 1rem; }
+  .file-info span { font-size: 0.88rem; color: var(--c-muted); }
+  .file-size { font-size: 0.8rem; color: var(--c-muted); white-space: nowrap; }
+  .note { margin-top: 24px; font-size: 0.9rem; color: var(--c-muted); }
+  .note a { color: var(--c-red); font-weight: 600; }
+</style>

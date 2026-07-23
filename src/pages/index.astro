@@ -1,0 +1,233 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const products = (await getCollection('products', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+const references = (await getCollection('references', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+const pillars = [
+  {
+    title: '130년 독일 기술력',
+    body: '1884년부터 이어온 독일 CREATON의 노하우. 1,000℃ 이상 고온 소성으로 완성되는 강도와 반영구적 수명.',
+  },
+  {
+    title: '천연 원료 · 친환경',
+    body: '점토, 진흙, 물 등 천연 원료만으로 생산. 자연 안료 유약으로 구현한 깊고 아름다운 색상.',
+  },
+  {
+    title: '한국 공식 파트너 시공',
+    body: '정품 공급부터 기술 지원, 시공 상담까지. 국내 기후에 맞춘 전문 컨설팅을 제공합니다.',
+  },
+];
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-inner">
+      <span class="eyebrow" style="color:#ffd9df">SINCE 1884 · GERMANY</span>
+      <h1 class="hero-title">
+        독일 130년 전통의<br />프리미엄 점토기와, <span class="accent">CREATON</span>
+      </h1>
+      <p class="hero-lead">
+        세월이 지나도 변하지 않는 색과 강도. 독일 CREATON 정품 지붕재를
+        한국 공식 파트너가 직접 공급하고 시공을 지원합니다.
+      </p>
+      <div class="hero-actions">
+        <a href="/products" class="btn btn-primary">제품 살펴보기</a>
+        <a href="/contact" class="btn btn-ghost">상담 문의하기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 브랜드 강점 -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:48px">
+        <span class="eyebrow">WHY CREATON</span>
+        <h2 class="section-title">왜 CREATON 기와인가</h2>
+        <p class="lead mx-auto text-center">저가 대체품과는 다른, 진짜 독일 정품의 가치.</p>
+      </div>
+      <div class="grid grid-3">
+        {pillars.map((p, i) => (
+          <div class="pillar">
+            <span class="pillar-num">0{i + 1}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 제품 미리보기 -->
+  <section class="section bg-soft">
+    <div class="container">
+      <div class="row-head">
+        <div>
+          <span class="eyebrow">PRODUCTS</span>
+          <h2 class="section-title">대표 제품</h2>
+        </div>
+        <a href="/products" class="btn btn-outline">전체 제품 보기</a>
+      </div>
+      {products.length > 0 ? (
+        <div class="grid grid-3">
+          {products.map((p) => (
+            <a href={`/products/${p.slug}`} class="card product-card">
+              <div class="card-media" style={p.data.image ? `background-image:url(${p.data.image})` : ''}>
+                {!p.data.image && <span class="ph">이미지 준비중</span>}
+              </div>
+              <div class="card-body">
+                <span class="tag">{p.data.category}</span>
+                <h3>{p.data.title}</h3>
+                <p>{p.data.summary}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="lead">제품 정보를 준비하고 있습니다.</p>
+      )}
+    </div>
+  </section>
+
+  <!-- 시공 사례 미리보기 -->
+  <section class="section">
+    <div class="container">
+      <div class="row-head">
+        <div>
+          <span class="eyebrow">REFERENCES</span>
+          <h2 class="section-title">시공 사례</h2>
+        </div>
+        <a href="/references" class="btn btn-outline">사례 더 보기</a>
+      </div>
+      {references.length > 0 ? (
+        <div class="grid grid-3">
+          {references.map((r) => (
+            <a href={`/references/${r.slug}`} class="card ref-card">
+              <div class="card-media" style={r.data.image ? `background-image:url(${r.data.image})` : ''}>
+                {!r.data.image && <span class="ph">이미지 준비중</span>}
+              </div>
+              <div class="card-body">
+                <h3>{r.data.title}</h3>
+                <p class="ref-meta">{[r.data.location, r.data.buildingType].filter(Boolean).join(' · ')}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="lead">시공 사례를 준비하고 있습니다.</p>
+      )}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="container cta-inner">
+      <div>
+        <h2>지붕 계획, 어떤 것부터 고민되시나요?</h2>
+        <p>제품 선택부터 색상, 시공까지 한국 공식 파트너가 무료로 상담해 드립니다.</p>
+      </div>
+      <a href="/contact" class="btn btn-primary">지금 상담 문의</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 82vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #2a2018 0%, #47372b 55%, #6b4a34 100%);
+    color: #fff;
+    overflow: hidden;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(120% 90% at 80% 10%, rgba(200,16,46,0.28), transparent 60%),
+      linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.45));
+  }
+  .hero-inner { position: relative; padding-block: 80px; max-width: 780px; }
+  .hero-title {
+    font-size: clamp(2rem, 6vw, 3.6rem);
+    color: #fff;
+    margin-bottom: 0.5em;
+  }
+  .hero-title .accent { color: #ff6b7f; }
+  .hero-lead {
+    font-size: clamp(1rem, 2.4vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 56ch;
+    margin-bottom: 2em;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  /* Pillars */
+  .pillar {
+    padding: 32px 28px;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    background: #fff;
+  }
+  .pillar-num {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--c-red);
+    letter-spacing: 0.05em;
+  }
+  .pillar h3 { margin: 12px 0 10px; font-size: 1.2rem; }
+  .pillar p { color: var(--c-slate); font-size: 0.96rem; margin: 0; }
+
+  /* Row head */
+  .row-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+
+  /* Cards */
+  .card-media {
+    aspect-ratio: 4 / 3;
+    background: var(--c-bg-clay) center/cover no-repeat;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-media .ph { color: var(--c-muted); font-size: 0.85rem; }
+  .card-body { padding: 20px 22px 24px; }
+  .card-body h3 { font-size: 1.15rem; margin: 6px 0 8px; }
+  .card-body p { color: var(--c-slate); font-size: 0.92rem; margin: 0; }
+  .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--c-red);
+    background: #fdecef;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .ref-meta { color: var(--c-muted); font-size: 0.88rem; }
+
+  /* CTA */
+  .cta-band { background: var(--c-ink); color: #fff; }
+  .cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    padding-block: clamp(40px, 6vw, 64px);
+    flex-wrap: wrap;
+  }
+  .cta-inner h2 { color: #fff; font-size: clamp(1.4rem, 3.5vw, 2rem); }
+  .cta-inner p { color: rgba(255, 255, 255, 0.8); margin: 0; }
+</style>

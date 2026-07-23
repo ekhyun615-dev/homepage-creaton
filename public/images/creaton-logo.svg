@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 40" role="img" aria-label="CREATON">
+  <!-- 워드마크 (본사 벡터 로고 확보 시 교체 예정) -->
+  <text x="0" y="31" font-family="Arial Black, Arial, Helvetica, sans-serif"
+        font-weight="900" font-size="33" letter-spacing="-1.2" fill="#111417">CREATON</text>
+  <!-- 사각 브러시 마크 -->
+  <g>
+    <rect x="150" y="7" width="30" height="30" fill="none" stroke="#111417" stroke-width="1.6"/>
+    <!-- 블루 브러시 -->
+    <path d="M154 34 C160 24, 170 14, 184 3 C180 12, 172 22, 160 35 Z" fill="#009fe3"/>
+    <!-- 레드 브러시 -->
+    <path d="M159 35 C166 26, 176 17, 189 7 C185 16, 177 26, 165 36 Z" fill="#e2001a"/>
+  </g>
+</svg>

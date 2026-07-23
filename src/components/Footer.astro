@@ -1,0 +1,83 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="brand">
+        <img src="/images/creaton-logo-white.svg" alt="CREATON" class="brand-logo" width="196" height="40" />
+        <span class="brand-sub">KOREA</span>
+      </div>
+      <p class="footer-desc">
+        독일 CREATON 정품 점토기와 한국 공식 파트너.<br />
+        130년 전통의 프리미엄 지붕재를 공급합니다.<br />
+        <span class="footer-group">CREATON — a wienerberger company</span>
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <a href="/about">브랜드 소개</a>
+      <a href="/products">제품</a>
+      <a href="/references">시공 사례</a>
+      <a href="/downloads">기술자료</a>
+      <a href="/contact">문의</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>문의</h4>
+      <!-- TODO: 실제 연락처로 교체 -->
+      <a href="tel:0221683333">전화 02-2168-3333</a>
+      <a href="mailto:info@creaton.kr">info@creaton.kr</a>
+      <p class="footer-addr">경기도 김포시 · (주소 확인 후 교체)</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom container">
+    <span>© {year} CREATON Korea. All rights reserved.</span>
+    <span class="footer-note">본 사이트는 독일 CREATON GmbH 제품의 한국 파트너가 운영합니다.</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--c-ink);
+    color: rgba(255, 255, 255, 0.75);
+    padding-top: 56px;
+    margin-top: 40px;
+  }
+  .footer-grid {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: 1fr;
+    padding-bottom: 40px;
+  }
+  .footer-brand .brand { display: flex; align-items: flex-end; gap: 8px; margin-bottom: 14px; }
+  .footer-brand .brand-logo { height: 28px; width: auto; }
+  .footer-brand .brand-sub { font-size: 0.7rem; font-weight: 700; color: rgba(255,255,255,0.6); letter-spacing: 0.18em; padding-bottom: 3px; }
+  .footer-desc { font-size: 0.9rem; line-height: 1.7; }
+  .footer-group { display: inline-block; margin-top: 8px; font-size: 0.78rem; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); }
+  .footer-col h4 { color: #fff; font-size: 0.9rem; margin-bottom: 14px; letter-spacing: 0.02em; }
+  .footer-col a, .footer-addr {
+    display: block;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 5px 0;
+  }
+  .footer-col a:hover { color: #fff; }
+  .footer-addr { margin: 6px 0 0; }
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    justify-content: space-between;
+    padding-block: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  @media (min-width: 720px) {
+    .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
+  }
+</style>

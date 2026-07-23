@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const products = (await getCollection('products', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+
+// 콘텐츠에 존재하는 카테고리를 categoryOrder 순으로 자동 수집
+const categories = [...new Set(products.map((p) => p.data.category))].sort((a, b) => {
+  const oa = products.find((p) => p.data.category === a)?.data.categoryOrder ?? 0;
+  const ob = products.find((p) => p.data.category === b)?.data.categoryOrder ?? 0;
+  return oa - ob;
+});
+
+// 카테고리 → 앵커 id (한글 유지 시 URL 인코딩되므로 인덱스 기반 id 사용)
+const catId = (cat: string) => `cat-${categories.indexOf(cat) + 1}`;
+---
+
+<BaseLayout
+  title="제품 | CREATON Korea"
+  description="독일 CREATON 점토기와 라인업. 평면기와·전통기와·특수기와와 다양한 색상/마감, 부속자재를 만나보세요."
+>
+  <section class="page-hero bg-ink">
+    <div class="container">
+      <span class="eyebrow" style="color:#ff9aa8">PRODUCTS</span>
+      <h1>CREATON 제품</h1>
+      <p class="lead" style="color:rgba(255,255,255,.82)">
+        약 1,000종에 이르는 독일 CREATON 기와 중, 한국에서 만나실 수 있는 대표 제품을 소개합니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- 카테고리 바로가기 -->
+  {categories.length > 1 && (
+    <nav class="cat-nav" aria-label="카테고리 바로가기">
+      <div class="container cat-nav-inner">
+        {categories.map((cat) => (
+          <a href={`#${catId(cat)}`} class="cat-chip">{cat}</a>
+        ))}
+      </div>
+    </nav>
+  )}
+
+  <section class="section">
+    <div class="container">
+      {categories.map((cat) => {
+        const items = products.filter((p) => p.data.category === cat);
+        if (items.length === 0) return null;
+        return (
+          <div class="cat-block" id={catId(cat)}>
+            <h2 class="cat-title">{cat}</h2>
+            <div class="grid grid-3">
+              {items.map((p) => (
+                <a href={`/products/${p.slug}`} class="card product-card">
+                  <div class="card-media" style={p.data.image ? `background-image:url(${p.data.image})` : ''}>
+                    {!p.data.image && <span class="ph">이미지 준비중</span>}
+                  </div>
+                  <div class="card-body">
+                    <h3>{p.data.title}</h3>
+                    <p>{p.data.summary}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+
+      {products.length === 0 && (
+        <p class="lead">제품 정보를 준비하고 있습니다. 자세한 내용은 문의해 주세요.</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero { padding-block: clamp(56px, 9vw, 96px); }
+  .page-hero h1 { color: #fff; font-size: clamp(1.8rem, 5vw, 2.8rem); }
+
+  .cat-nav {
+    position: sticky; top: 68px; z-index: 30;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: saturate(180%) blur(8px);
+    border-bottom: 1px solid var(--c-line);
+  }
+  .cat-nav-inner { display: flex; gap: 8px; overflow-x: auto; padding-block: 12px; }
+  .cat-chip {
+    flex: none; font-size: 0.88rem; font-weight: 500; color: var(--c-slate);
+    padding: 7px 14px; border: 1px solid var(--c-line); border-radius: 20px; white-space: nowrap;
+  }
+  .cat-chip:hover { border-color: var(--c-red); color: var(--c-red); }
+
+  .cat-block { margin-bottom: 56px; scroll-margin-top: 130px; }
+  .cat-title {
+    font-size: 1.4rem;
+    padding-bottom: 12px;
+    margin-bottom: 28px;
+    border-bottom: 2px solid var(--c-red);
+    display: inline-block;
+  }
+  .card-media {
+    aspect-ratio: 4 / 3;
+    background: var(--c-bg-clay) center/cover no-repeat;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-media .ph { color: var(--c-muted); font-size: 0.85rem; }
+  .card-body { padding: 20px 22px 24px; }
+  .card-body h3 { font-size: 1.15rem; margin: 0 0 8px; }
+  .card-body p { color: var(--c-slate); font-size: 0.92rem; margin: 0; }
+</style>

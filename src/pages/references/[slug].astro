@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const refs = await getCollection('references', ({ data }) => !data.draft);
+  return refs.map((r) => ({ params: { slug: r.slug }, props: { entry: r } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const d = entry.data;
+const meta = [
+  ['위치', d.location],
+  ['건물 유형', d.buildingType],
+  ['적용 제품', d.product],
+  ['시공 시기', d.date],
+].filter(([, v]) => v);
+---
+
+<BaseLayout title={`${d.title} | 시공 사례 | CREATON Korea`} description={`${d.title} — ${[d.location, d.buildingType].filter(Boolean).join(', ')}`}>
+  <article>
+    <section class="ref-hero" style={d.image ? `background-image:url(${d.image})` : ''}>
+      <div class="ref-hero-overlay"></div>
+      <div class="container ref-hero-inner">
+        <a href="/references" class="back">← 시공 사례</a>
+        <h1>{d.title}</h1>
+        <p>{[d.location, d.buildingType].filter(Boolean).join(' · ')}</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container ref-body">
+        <div class="prose">
+          <Content />
+        </div>
+        <aside class="ref-meta-box">
+          <h4>프로젝트 정보</h4>
+          <dl>
+            {meta.map(([k, v]) => (<><dt>{k}</dt><dd>{v}</dd></>))}
+          </dl>
+          <a href="/contact" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">비슷한 시공 문의</a>
+        </aside>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .ref-hero {
+    position: relative;
+    min-height: 46vh;
+    display: flex;
+    align-items: flex-end;
+    background: var(--c-anthracite) center/cover no-repeat;
+    color: #fff;
+  }
+  .ref-hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent, rgba(0,0,0,.6)); }
+  .ref-hero-inner { position: relative; padding-block: 40px; }
+  .ref-hero-inner h1 { color: #fff; font-size: clamp(1.6rem, 4.5vw, 2.6rem); }
+  .ref-hero-inner p { color: rgba(255,255,255,.85); margin: 0; }
+  .back { display: inline-block; color: rgba(255,255,255,.85); font-size: 0.9rem; margin-bottom: 12px; }
+  .ref-body { display: grid; gap: 40px; grid-template-columns: 1fr; }
+  .prose :global(p) { color: var(--c-slate); }
+  .prose :global(h2) { margin-top: 1.4em; }
+  .ref-meta-box {
+    align-self: start;
+    padding: 24px;
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+  }
+  .ref-meta-box h4 { margin: 0 0 14px; font-size: 0.95rem; }
+  .ref-meta-box dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; }
+  .ref-meta-box dt { color: var(--c-muted); font-size: 0.85rem; }
+  .ref-meta-box dd { margin: 0; font-size: 0.9rem; font-weight: 500; }
+  @media (min-width: 860px) { .ref-body { grid-template-columns: 1fr 300px; } }
+</style>

@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products', ({ data }) => !data.draft);
+  return products.map((p) => ({ params: { slug: p.slug }, props: { entry: p } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const d = entry.data;
+const hasColors = d.colors && d.colors.length > 0;
+const hasSpecs = d.specs && d.specs.length > 0;
+const hasGallery = d.gallery && d.gallery.length > 0;
+---
+
+<BaseLayout title={`${d.title} | CREATON Korea`} description={d.summary}>
+  <article>
+    <!-- 상단: 대표 이미지 + 기본 정보 -->
+    <section class="detail-hero">
+      <div class="container detail-grid">
+        <div class="detail-media" style={d.image ? `background-image:url(${d.image})` : ''}>
+          {!d.image && <span class="ph">이미지 준비중</span>}
+        </div>
+        <div class="detail-info">
+          <a href="/products" class="back">← 제품 목록</a>
+          <span class="tag">{d.category}</span>
+          <h1>{d.title}</h1>
+          <p class="lead">{d.summary}</p>
+          <a href="/contact" class="btn btn-primary" style="margin-top:8px">이 제품 문의하기</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container detail-body">
+      <!-- 1) 설명 -->
+      <section class="pblock">
+        <h2 class="pblock-title">제품 설명</h2>
+        <div class="prose"><Content /></div>
+      </section>
+
+      <!-- 2) 색상 (이미지 카드) -->
+      {hasColors && (
+        <section class="pblock">
+          <h2 class="pblock-title">색상 · 마감</h2>
+          <div class="color-grid">
+            {d.colors!.map((c) => (
+              <figure class="color-card">
+                <div
+                  class="color-swatch"
+                  style={c.image ? `background-image:url(${c.image})` : `background:${c.hex ?? '#ddd'}`}
+                >
+                  {!c.image && !c.hex && <span class="ph">준비중</span>}
+                </div>
+                <figcaption>{c.name}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <p class="pnote">※ 실제 색상은 소성·마감 조건에 따라 다를 수 있어 실물 샘플 확인을 권장합니다.</p>
+        </section>
+      )}
+
+      <!-- 3) 규격표 -->
+      {hasSpecs && (
+        <section class="pblock">
+          <h2 class="pblock-title">규격표</h2>
+          <div class="spec-table-wrap">
+            <table class="spec-table">
+              <tbody>
+                {d.specs!.map((s) => (
+                  <tr><th>{s.label}</th><td>{s.value}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      <!-- 4) 시공 사진 (슬라이드) -->
+      <section class="pblock">
+        <h2 class="pblock-title">시공 사진</h2>
+        {hasGallery ? (
+          <div class="slider" data-slider>
+            <div class="slides">
+              {d.gallery!.map((src, i) => (
+                <div class="slide" data-index={i}>
+                  <img src={src} alt={`${d.title} 시공 사진 ${i + 1}`} loading="lazy" />
+                </div>
+              ))}
+            </div>
+            {d.gallery!.length > 1 && (
+              <>
+                <button class="slider-btn prev" aria-label="이전 사진" data-prev>‹</button>
+                <button class="slider-btn next" aria-label="다음 사진" data-next>›</button>
+                <div class="slider-dots" data-dots>
+                  {d.gallery!.map((_, i) => (
+                    <button class="dot" data-dot={i} aria-label={`${i + 1}번 사진`}></button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        ) : (
+          <div class="gallery-empty">시공 사진을 준비하고 있습니다.</div>
+        )}
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .detail-hero { padding-block: 40px; background: var(--c-bg-soft); }
+  .detail-grid { display: grid; gap: 36px; grid-template-columns: 1fr; }
+  .detail-media {
+    aspect-ratio: 4 / 3;
+    background: var(--c-bg-clay) center/cover no-repeat;
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .detail-media .ph { color: var(--c-muted); }
+  .back { display: inline-block; font-size: 0.9rem; color: var(--c-muted); margin-bottom: 14px; }
+  .back:hover { color: var(--c-red); }
+  .tag {
+    display: inline-block; font-size: 0.72rem; font-weight: 600; color: var(--c-red);
+    background: #fdecef; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px;
+  }
+  .detail-info h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); }
+
+  .detail-body { max-width: 860px; padding-top: 8px; }
+  .pblock { padding-block: clamp(32px, 5vw, 48px); border-bottom: 1px solid var(--c-line); }
+  .pblock:last-child { border-bottom: none; }
+  .pblock-title {
+    font-size: 1.3rem;
+    margin-bottom: 22px;
+    padding-left: 12px;
+    border-left: 4px solid var(--c-red);
+  }
+  .prose :global(p) { color: var(--c-slate); }
+  .prose :global(h2) { display: none; } /* 본문 첫 h2는 제목과 중복 → 숨김 */
+
+  /* 색상 카드 */
+  .color-grid { display: grid; gap: 16px; grid-template-columns: repeat(2, 1fr); }
+  .color-card { margin: 0; }
+  .color-swatch {
+    aspect-ratio: 3 / 2;
+    border-radius: var(--radius);
+    background-size: cover; background-position: center;
+    border: 1px solid var(--c-line);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .color-swatch .ph { color: #fff; font-size: 0.8rem; opacity: 0.8; }
+  .color-card figcaption { margin-top: 8px; font-size: 0.9rem; font-weight: 500; }
+  .pnote { margin-top: 16px; font-size: 0.82rem; color: var(--c-muted); }
+
+  /* 규격표 */
+  .spec-table-wrap { overflow-x: auto; }
+  .spec-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .spec-table th, .spec-table td {
+    text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--c-line);
+  }
+  .spec-table th {
+    width: 34%; background: var(--c-bg-soft); font-weight: 600; color: var(--c-ink);
+    white-space: nowrap;
+  }
+  .spec-table td { color: var(--c-slate); }
+
+  /* 슬라이더 */
+  .slider { position: relative; border-radius: var(--radius); overflow: hidden; background: var(--c-bg-clay); }
+  .slides { display: flex; transition: transform 0.35s ease; }
+  .slide { min-width: 100%; aspect-ratio: 16 / 10; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; }
+  .slider-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.9); border: none; cursor: pointer;
+    font-size: 1.6rem; line-height: 1; color: var(--c-ink);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .slider-btn.prev { left: 12px; }
+  .slider-btn.next { right: 12px; }
+  .slider-dots { position: absolute; bottom: 12px; left: 0; right: 0; display: flex; gap: 8px; justify-content: center; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; border: none; background: rgba(255,255,255,0.6); cursor: pointer; padding: 0; }
+  .dot.active { background: #fff; }
+  .gallery-empty {
+    padding: 48px; text-align: center; color: var(--c-muted);
+    background: var(--c-bg-soft); border-radius: var(--radius); border: 1px dashed var(--c-line);
+  }
+
+  @media (min-width: 640px) { .color-grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 820px) { .detail-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+</style>
+
+<script>
+  document.querySelectorAll('[data-slider]').forEach((slider) => {
+    const slides = slider.querySelector('.slides') as HTMLElement | null;
+    const total = slider.querySelectorAll('.slide').length;
+    const dots = slider.querySelectorAll('[data-dot]');
+    let idx = 0;
+    const go = (n: number) => {
+      idx = (n + total) % total;
+      if (slides) slides.style.transform = `translateX(-${idx * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    };
+    slider.querySelector('[data-prev]')?.addEventListener('click', () => go(idx - 1));
+    slider.querySelector('[data-next]')?.addEventListener('click', () => go(idx + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+    go(0);
+  });
+</script>

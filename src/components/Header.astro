@@ -1,0 +1,376 @@
+---
+import { getCollection } from 'astro:content';
+
+const nav = [
+  { label: '브랜드 소개', href: '/about' },
+  { label: '제품', href: '/products', mega: true },
+  { label: '시공 사례', href: '/references' },
+  { label: '기술자료', href: '/downloads' },
+];
+
+// 제품 카테고리 → 제품 목록 (메가메뉴용)
+const products = (await getCollection('products', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+const categoryNames = [...new Set(products.map((p) => p.data.category))].sort((a, b) => {
+  const oa = products.find((p) => p.data.category === a)?.data.categoryOrder ?? 0;
+  const ob = products.find((p) => p.data.category === b)?.data.categoryOrder ?? 0;
+  return oa - ob;
+});
+const productMenu = categoryNames.map((cat, i) => ({
+  name: cat,
+  anchor: `/products#cat-${i + 1}`,
+  items: products
+    .filter((p) => p.data.category === cat)
+    .map((p) => ({
+      title: p.data.titleEn ?? p.data.title,
+      href: `/products/${p.slug}`,
+      image: p.data.image,
+    })),
+}));
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="brand" aria-label="CREATON Korea 홈">
+      <img src="/images/creaton-logo.svg" alt="CREATON" class="brand-logo" width="196" height="40" />
+      <span class="brand-sub">KOREA</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="주요 메뉴">
+      {nav.map((item) =>
+        item.mega ? (
+          <div class="nav-item has-mega">
+            <a href={item.href} class:list={['nav-link', { active: isActive(item.href) }]}>
+              {item.label}
+              <span class="caret" aria-hidden="true">▾</span>
+            </a>
+            <div class="mega">
+              <div class="container mega-inner">
+                <div class="mega-sidebar" role="tablist" aria-label="제품 카테고리">
+                  {productMenu.map((cat, i) => (
+                    <button
+                      type="button"
+                      class:list={['mega-cat-btn', i === 0 && 'is-active']}
+                      data-cat-btn={i}
+                      role="tab"
+                      aria-selected={i === 0 ? 'true' : 'false'}
+                    >
+                      <span>{cat.name}</span>
+                      <span class="mega-cat-count">{cat.items.length}</span>
+                    </button>
+                  ))}
+                  <a href="/products" class="mega-all">전체 제품 보기 →</a>
+                </div>
+                <div class="mega-stage">
+                  {productMenu.map((cat, i) => (
+                    <div class:list={['mega-grid', i === 0 && 'is-active']} data-cat-panel={i}>
+                      {cat.items.map((p) => (
+                        <a href={p.href} class="mega-card">
+                          <span class="mega-card-media" style={p.image ? `background-image:url(${p.image})` : ''}>
+                            {!p.image && <span class="mega-card-ph">{p.title}</span>}
+                          </span>
+                          <span class="mega-card-body">
+                            <span class="mega-card-title">{p.title}</span>
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <a href={item.href} class:list={['nav-link', { active: isActive(item.href) }]}>
+            {item.label}
+          </a>
+        )
+      )}
+    </nav>
+
+    <a href="/contact" class="btn btn-primary header-cta">상담 문의</a>
+
+    <button id="navToggle" class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav id="mobileNav" class="nav-mobile" aria-label="모바일 메뉴" hidden>
+    {nav.map((item) =>
+      item.mega ? (
+        <details class="m-group">
+          <summary>
+            <a href={item.href} class="nav-link">{item.label}</a>
+            <span class="m-caret" aria-hidden="true">▾</span>
+          </summary>
+          <div class="m-sub">
+            {productMenu.map((cat) => (
+              <div class="m-sub-cat">
+                <a href={cat.anchor} class="m-cat-title">{cat.name}</a>
+                {cat.items.map((p) => (
+                  <a href={p.href} class="m-prod">{p.title}</a>
+                ))}
+              </div>
+            ))}
+          </div>
+        </details>
+      ) : (
+        <a href={item.href} class:list={['nav-link', { active: isActive(item.href) }]}>
+          {item.label}
+        </a>
+      )
+    )}
+    <a href="/contact" class="btn btn-primary" style="margin-top:8px">상담 문의</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(180%) blur(8px);
+    border-bottom: 1px solid var(--c-line);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  .brand-logo { height: 30px; width: auto; display: block; }
+  .brand-sub {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--c-slate);
+    letter-spacing: 0.18em;
+    align-self: flex-end;
+    padding-bottom: 4px;
+  }
+  .nav-desktop { display: none; gap: 28px; }
+  .nav-item { position: static; }
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.96rem;
+    font-weight: 500;
+    color: var(--c-slate);
+    padding: 6px 0;
+    position: relative;
+  }
+  .nav-link:hover { color: var(--c-ink); }
+  .nav-link.active { color: var(--c-red); font-weight: 600; }
+  .header-cta { display: none; }
+  .caret { font-size: 0.7em; margin-left: 3px; transition: transform 0.2s ease; }
+  .has-mega:hover .caret, .has-mega:focus-within .caret { transform: rotate(180deg); color: var(--c-red); }
+
+  /* ---- Mega menu ---- */
+  .mega {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: #fff;
+    border-top: 2px solid var(--c-red);
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+  .has-mega:hover .mega,
+  .has-mega:focus-within .mega {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .mega-inner {
+    display: flex;
+    gap: 32px;
+    padding-block: 28px 32px;
+  }
+  .mega-sidebar {
+    flex: 0 0 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-right: 1px solid var(--c-line);
+    padding-right: 24px;
+  }
+  .mega-cat-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px;
+    border: none;
+    background: none;
+    border-radius: var(--radius);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--c-slate);
+    cursor: pointer;
+  }
+  .mega-cat-btn:hover { background: var(--c-bg-soft); color: var(--c-ink); }
+  .mega-cat-btn.is-active { background: var(--c-bg-clay); color: var(--c-red); }
+  .mega-cat-count {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--c-muted);
+  }
+  .mega-cat-btn.is-active .mega-cat-count { color: var(--c-red); }
+  .mega-all {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 12px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--c-red);
+  }
+  .mega-all:hover { text-decoration: underline; }
+
+  .mega-stage { flex: 1; min-width: 0; }
+  .mega-grid {
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+  }
+  .mega-grid.is-active { display: grid; }
+  .mega-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: #fff;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .mega-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--c-red);
+    box-shadow: var(--shadow-md);
+  }
+  .mega-card-media {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(150deg, var(--c-bg-clay), var(--c-bg-soft));
+    background-size: cover;
+    background-position: center;
+  }
+  .mega-card-ph {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.82rem;
+    font-weight: 800;
+    font-style: italic;
+    color: var(--c-muted);
+  }
+  .mega-card-body { padding: 10px 12px 12px; }
+  .mega-card-title { font-size: 0.86rem; font-weight: 700; color: var(--c-ink); }
+  .mega-card:hover .mega-card-title { color: var(--c-red); }
+
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--c-ink);
+    transition: 0.2s;
+  }
+  .nav-mobile {
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 20px 20px;
+    border-top: 1px solid var(--c-line);
+    background: #fff;
+  }
+  .nav-mobile:not([hidden]) { display: flex; }
+  .nav-mobile > .nav-link { padding: 12px 0; font-size: 1.05rem; border-bottom: 1px solid var(--c-bg-soft); }
+
+  /* 모바일 제품 서브메뉴 */
+  .m-group { border-bottom: 1px solid var(--c-bg-soft); }
+  .m-group summary {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 0; cursor: pointer; list-style: none;
+  }
+  .m-group summary::-webkit-details-marker { display: none; }
+  .m-group summary .nav-link { padding: 0; font-size: 1.05rem; }
+  .m-caret { transition: transform 0.2s; color: var(--c-muted); }
+  .m-group[open] .m-caret { transform: rotate(180deg); }
+  .m-sub { padding: 4px 0 14px 10px; }
+  .m-sub-cat { margin-bottom: 12px; }
+  .m-cat-title { display: block; font-size: 0.85rem; font-weight: 700; color: var(--c-red); padding: 4px 0; }
+  .m-prod { display: block; font-size: 0.95rem; color: var(--c-slate); padding: 6px 0 6px 10px; }
+
+  @media (min-width: 960px) {
+    .nav-desktop { display: flex; }
+    .header-cta { display: inline-flex; }
+    .nav-toggle { display: none; }
+    .nav-mobile { display: none !important; }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('mobileNav');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.hasAttribute('hidden');
+    if (open) {
+      menu?.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      menu?.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // 메가메뉴: 카테고리 hover/click/focus 시 해당 제품 그리드로 전환
+  document.querySelectorAll('.has-mega').forEach((megaItem) => {
+    const btns = megaItem.querySelectorAll<HTMLButtonElement>('[data-cat-btn]');
+    const panels = megaItem.querySelectorAll<HTMLDivElement>('[data-cat-panel]');
+    const activate = (idx: string) => {
+      btns.forEach((b) => {
+        const active = b.dataset.catBtn === idx;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-selected', String(active));
+      });
+      panels.forEach((p) => p.classList.toggle('is-active', p.dataset.catPanel === idx));
+    };
+    btns.forEach((btn) => {
+      btn.addEventListener('mouseenter', () => activate(btn.dataset.catBtn!));
+      btn.addEventListener('click', () => activate(btn.dataset.catBtn!));
+      btn.addEventListener('focus', () => activate(btn.dataset.catBtn!));
+    });
+  });
+</script>

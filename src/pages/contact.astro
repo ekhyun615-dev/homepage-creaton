@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="문의 | CREATON Korea"
+  description="CREATON 정품 점토기와 상담 및 견적 문의. 전화, 이메일, 온라인 문의로 편하게 연락 주세요."
+>
+  <section class="page-hero bg-ink">
+    <div class="container">
+      <span class="eyebrow" style="color:#ff9aa8">CONTACT</span>
+      <h1>상담 · 견적 문의</h1>
+      <p class="lead" style="color:rgba(255,255,255,.82)">
+        제품 선택부터 색상, 시공까지 무엇이든 문의해 주세요. 한국 공식 파트너가 도와드립니다.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <!-- 빠른 연락 -->
+      <div class="contact-side">
+        <h2>바로 연락하기</h2>
+        <!-- TODO: 실제 연락처/주소/카카오채널로 교체 -->
+        <a href="tel:0221683333" class="contact-item">
+          <span class="ci-label">전화</span>
+          <strong>02-2168-3333</strong>
+        </a>
+        <a href="mailto:info@creaton.kr" class="contact-item">
+          <span class="ci-label">이메일</span>
+          <strong>info@creaton.kr</strong>
+        </a>
+        <div class="contact-item">
+          <span class="ci-label">주소</span>
+          <strong>경기도 김포시 (주소 확인 후 교체)</strong>
+        </div>
+        <div class="contact-item">
+          <span class="ci-label">운영시간</span>
+          <strong>평일 09:00 – 18:00</strong>
+        </div>
+      </div>
+
+      <!-- 문의 폼 -->
+      <div class="contact-form-wrap">
+        <h2>온라인 문의</h2>
+        <!-- TODO: action 을 실제 폼 처리 서비스(Formspree/Web3Forms 등) 또는 자체 API로 교체하세요. -->
+        <form class="contact-form" action="#" method="POST">
+          <div class="field">
+            <label for="name">이름 <span>*</span></label>
+            <input id="name" name="name" type="text" required placeholder="홍길동" />
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="phone">연락처 <span>*</span></label>
+              <input id="phone" name="phone" type="tel" required placeholder="010-0000-0000" />
+            </div>
+            <div class="field">
+              <label for="email">이메일</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="type">문의 유형</label>
+            <select id="type" name="type">
+              <option>제품 문의</option>
+              <option>시공 상담</option>
+              <option>견적 요청</option>
+              <option>기타</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">문의 내용 <span>*</span></label>
+            <textarea id="message" name="message" rows="5" required placeholder="현장 위치, 지붕 면적, 원하시는 제품 등을 적어주시면 상담에 도움이 됩니다."></textarea>
+          </div>
+          <label class="agree">
+            <input type="checkbox" required />
+            <span>개인정보 수집 및 이용에 동의합니다. (상담 목적 외 사용하지 않습니다.)</span>
+          </label>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">문의 보내기</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero { padding-block: clamp(56px, 9vw, 96px); }
+  .page-hero h1 { color: #fff; font-size: clamp(1.8rem, 5vw, 2.8rem); }
+  .contact-grid { display: grid; gap: 40px; grid-template-columns: 1fr; }
+  .contact-side h2, .contact-form-wrap h2 { font-size: 1.3rem; margin-bottom: 20px; }
+  .contact-item {
+    display: block;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--c-line);
+  }
+  .ci-label { display: block; font-size: 0.78rem; color: var(--c-muted); margin-bottom: 4px; }
+  .contact-item strong { font-size: 1.05rem; font-weight: 600; }
+  a.contact-item:hover strong { color: var(--c-red); }
+
+  .contact-form { display: grid; gap: 18px; }
+  .row { display: grid; gap: 18px; grid-template-columns: 1fr; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-size: 0.88rem; font-weight: 600; }
+  .field label span { color: var(--c-red); }
+  .field input, .field select, .field textarea {
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 11px 13px;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--c-ink);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--c-red);
+    box-shadow: 0 0 0 3px rgba(200,16,46,.12);
+  }
+  .agree { display: flex; gap: 10px; align-items: flex-start; font-size: 0.85rem; color: var(--c-slate); }
+  .agree input { margin-top: 3px; }
+
+  @media (min-width: 820px) {
+    .contact-grid { grid-template-columns: 320px 1fr; gap: 56px; }
+    .row { grid-template-columns: 1fr 1fr; }
+  }
+</style>

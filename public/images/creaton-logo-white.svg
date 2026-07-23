@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 40" role="img" aria-label="CREATON">
+  <text x="0" y="31" font-family="Arial Black, Arial, Helvetica, sans-serif"
+        font-weight="900" font-size="33" letter-spacing="-1.2" fill="#ffffff">CREATON</text>
+  <g>
+    <rect x="150" y="7" width="30" height="30" fill="none" stroke="#ffffff" stroke-width="1.6"/>
+    <path d="M154 34 C160 24, 170 14, 184 3 C180 12, 172 22, 160 35 Z" fill="#009fe3"/>
+    <path d="M159 35 C166 26, 176 17, 189 7 C185 16, 177 26, 165 36 Z" fill="#e2001a"/>
+  </g>
+</svg>
