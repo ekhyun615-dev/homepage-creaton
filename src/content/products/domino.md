@@ -4,35 +4,49 @@ titleEn: "DOMINO"
 category: "평기와"
 categoryOrder: 3
 order: 3
-summary: "매끈한 평면 디자인의 대표 평기와."
+summary: "높은 철산화물 함량의 강렬한 색상과 강한 수직 결합의 배수 성능을 갖춘 직선적인 평기와."
+image: "/images/products/domino/hero.jpg"
 colors:
   - name: "내추럴 레드"
-    hex: "#a83a2a"
-  - name: "엥고베 브라운"
-    hex: "#5a3a2a"
-  - name: "엥고베 안트라사이트"
-    hex: "#26292b"
-  - name: "유약 블랙"
-    hex: "#141719"
+    image: "/images/products/domino/color-100-natur.jpg"
+  - name: "구리색"
+    image: "/images/products/domino/color-200-kupfer.jpg"
+  - name: "와인레드"
+    image: "/images/products/domino/color-202-weinrot.jpg"
+  - name: "그레이"
+    image: "/images/products/domino/color-231-grau.jpg"
+  - name: "슬레이트그레이 (무광)"
+    image: "/images/products/domino/color-418-schief.jpg"
+  - name: "블랙 (유광)"
+    image: "/images/products/domino/color-503-schw-fin.jpg"
+  - name: "슬레이트 (유광)"
+    image: "/images/products/domino/color-508-schief-fin.jpg"
+  - name: "무광블랙"
+    image: "/images/products/domino/color-821-schw-matt.jpg"
 specs:
-  - label: "재질"
-    value: "점토 (천연 원료)"
-  - label: "소성"
-    value: "1,000℃ 이상 고온 소성"
   - label: "정미치수"
-    value: "확인 중"
-  - label: "소요 매수"
-    value: "확인 중 (매/㎡)"
-  - label: "색상·마감"
-    value: "내추럴 · 엥고베 · 유약"
-gallery: []
+    value: "257 × 436 mm"
+  - label: "커버 폭 (최소/평균/최대)"
+    value: "224 / 225 / 226 mm"
+  - label: "커버 길이 (최소/평균/최대)"
+    value: "343 / 348 / 354 mm"
+  - label: "소요 매수/㎡"
+    value: "12.4~13.1 매"
+  - label: "무게"
+    value: "매당 4.2 kg · ㎡당 53.3 kg"
+  - label: "팔레트당 무게·매수"
+    value: "1,033 kg · 240매"
+  - label: "최소 지붕 경사"
+    value: "10° (특정 조건) · 표준 권장 18° 이상"
+gallery:
+  - "/images/products/domino/case-1.jpg"
+  - "/images/products/domino/case-2.jpg"
+  - "/images/products/domino/case-3.jpg"
 draft: false
 ---
 
 ## DOMINO 도미노
 
-매끈한 평면 디자인의 대표 평기와.
+직선적인 형태의 글래지드 평기와로, 타일당 12mm의 넓은 슬라이딩 범위를 제공합니다. 높은 철산화물 함유로 강렬한 색상을 표현하며, 강한 수직 결합 구조로 우수한 배수 성능을 갖췄습니다.
 
-CREATON **평기와** 라인의 제품으로, 천연 점토를 1,000℃ 이상 고온에서 소성해 강도와 내구성을 확보했습니다.
-
-> 아래 색상 스와치·규격 값·시공 사진은 예시/자리표시이며, 본사 자료로 교체 예정입니다.
+25° 이상 경사 지붕에서는 추가 조치 없이 설치할 수 있으며, 매끈한 평면 디자인을 대표하는 8가지 색상(엥고베 6종 + 유광 2종)을 제공합니다.

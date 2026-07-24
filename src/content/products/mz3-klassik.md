@@ -3,35 +3,40 @@ title: "MZ3 KLASSIK"
 category: "낮은 골기와"
 categoryOrder: 1
 order: 5
-summary: "MZ3의 전통적 감성을 살린 클래식 버전."
+summary: "검증된 평탄 기와 — 16mm 이동 범위와 4가지 색상의 스테디셀러."
+image: "/images/products/mz3-klassik/hero.jpg"
 colors:
   - name: "내추럴 레드"
-    hex: "#a83a2a"
-  - name: "엥고베 브라운"
-    hex: "#5a3a2a"
-  - name: "엥고베 안트라사이트"
-    hex: "#26292b"
-  - name: "유약 블랙"
-    hex: "#141719"
+    image: "/images/products/mz3-klassik/color-100-natur.jpg"
+  - name: "구리색"
+    image: "/images/products/mz3-klassik/color-200-kupfer.jpg"
+  - name: "올드그레이"
+    image: "/images/products/mz3-klassik/color-215-altgrau.jpg"
+  - name: "안트라사이트"
+    image: "/images/products/mz3-klassik/color-220-anthra.jpg"
 specs:
-  - label: "재질"
-    value: "점토 (천연 원료)"
-  - label: "소성"
-    value: "1,000℃ 이상 고온 소성"
   - label: "정미치수"
-    value: "확인 중"
-  - label: "소요 매수"
-    value: "확인 중 (매/㎡)"
-  - label: "색상·마감"
-    value: "내추럴 · 엥고베 · 유약"
-gallery: []
+    value: "약 255 × 420 mm"
+  - label: "커버 폭 (최소/평균/최대)"
+    value: "203 / 205 / 207 mm"
+  - label: "커버 길이 (최소/평균/최대)"
+    value: "343 / 351 / 358 mm"
+  - label: "소요 매수/㎡ (최소/평균/최대)"
+    value: "13.5 / 13.9 / 14.4 매"
+  - label: "무게"
+    value: "개당 3.6 kg · ㎡당 50 kg"
+  - label: "팔레트당 무게·매수"
+    value: "889 kg · 240매"
+  - label: "최소 지붕 경사"
+    value: "16°"
+gallery:
+  - "/images/products/mz3-klassik/case-1.jpg"
+  - "/images/products/mz3-klassik/case-2.jpg"
 draft: false
 ---
 
 ## MZ3 KLASSIK
 
-MZ3의 전통적 감성을 살린 클래식 버전.
+"Der bewährte Flachdachziegel" — 검증된 평탄 기와. 최대 16mm의 조정 가능한 이동 범위로 서까래 간격에 최적으로 맞춰지며, 기술적으로 최적화된 겹침 구조로 우수한 배수 성능을 제공합니다.
 
-CREATON **낮은 골기와** 라인의 제품으로, 천연 점토를 1,000℃ 이상 고온에서 소성해 강도와 내구성을 확보했습니다.
-
-> 아래 색상 스와치·규격 값·시공 사진은 예시/자리표시이며, 본사 자료로 교체 예정입니다.
+4가지 색상으로 다양한 미적 선택이 가능한, 오랜 기간 검증된 스테디셀러 라인입니다.

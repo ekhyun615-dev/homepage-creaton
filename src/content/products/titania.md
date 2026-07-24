@@ -4,35 +4,45 @@ titleEn: "TITANIA"
 category: "낮은 골기와"
 categoryOrder: 1
 order: 2
-summary: "균형 잡힌 비례로 클래식과 모던 어디에나 어울리는 스테디셀러."
+summary: "44mm의 넓은 이동 범위와 뛰어난 가격 대비 성능을 갖춘 유연한 로우 프로파일 기와."
+image: "/images/products/titania/hero.jpg"
 colors:
-  - name: "내추럴 레드"
-    hex: "#a83a2a"
-  - name: "엥고베 브라운"
-    hex: "#5a3a2a"
-  - name: "엥고베 안트라사이트"
-    hex: "#26292b"
-  - name: "유약 블랙"
-    hex: "#141719"
+  - name: "구리색"
+    image: "/images/products/titania/color-200-kupfer.jpg"
+  - name: "슬레이트그레이"
+    image: "/images/products/titania/color-418-schief.jpg"
+  - name: "에델블랙 (유광)"
+    image: "/images/products/titania/color-503-schw-fin.jpg"
+  - name: "슬레이트 (유광)"
+    image: "/images/products/titania/color-508-schief-fin.jpg"
+  - name: "브라운 (프리미엄 유광)"
+    image: "/images/products/titania/color-602-braun-nob.jpg"
+  - name: "무광블랙"
+    image: "/images/products/titania/color-821-schw-matt.jpg"
 specs:
-  - label: "재질"
-    value: "점토 (천연 원료)"
-  - label: "소성"
-    value: "1,000℃ 이상 고온 소성"
   - label: "정미치수"
-    value: "확인 중"
-  - label: "소요 매수"
-    value: "확인 중 (매/㎡)"
-  - label: "색상·마감"
-    value: "내추럴 · 엥고베 · 유약"
-gallery: []
+    value: "325 × 515 mm"
+  - label: "커버 폭 (최소/평균/최대)"
+    value: "260 / 262 / 264 mm"
+  - label: "커버 길이 (최소/평균/최대)"
+    value: "380 / 402 / 424 mm"
+  - label: "소요 매수/㎡ (최소/평균/최대)"
+    value: "9.0 / 9.5 / 10.1 매"
+  - label: "무게"
+    value: "개당 4.9 kg · ㎡당 46.6 kg"
+  - label: "팔레트당 무게·매수"
+    value: "966 kg · 192매"
+  - label: "최소 지붕 경사"
+    value: "16° (추가 조치 필요)"
+gallery:
+  - "/images/products/titania/case-1.jpg"
+  - "/images/products/titania/case-2.jpg"
+  - "/images/products/titania/case-3.jpg"
 draft: false
 ---
 
 ## TITANIA 티타니아
 
-균형 잡힌 비례로 클래식과 모던 어디에나 어울리는 스테디셀러.
+최대 이동 공간을 갖춘 유연한 로우 프로파일 기와로, ㎡당 9매의 우수한 경제성과 44mm의 폭넓은 이동 범위를 제공합니다.
 
-CREATON **낮은 골기와** 라인의 제품으로, 천연 점토를 1,000℃ 이상 고온에서 소성해 강도와 내구성을 확보했습니다.
-
-> 아래 색상 스와치·규격 값·시공 사진은 예시/자리표시이며, 본사 자료로 교체 예정입니다.
+정교한 홈 기술로 최적의 물 흐름을 보장하며, 무광 엥고베부터 프리미엄 유광까지 6가지 색상으로 클래식과 모던 어디에나 어울립니다.

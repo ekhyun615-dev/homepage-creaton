@@ -4,35 +4,40 @@ titleEn: "RUSTICO"
 category: "이중관형기와"
 categoryOrder: 4
 order: 2
-summary: "러스틱한 질감의 이중관형 기와."
+summary: "소박한 형태 디자인과 리노베이션에 이상적인 유연한 커버 크기의 팔츠 기와."
+image: "/images/products/rustico/hero.jpg"
 colors:
   - name: "내추럴 레드"
-    hex: "#a83a2a"
-  - name: "엥고베 브라운"
-    hex: "#5a3a2a"
-  - name: "엥고베 안트라사이트"
-    hex: "#26292b"
-  - name: "유약 블랙"
-    hex: "#141719"
+    image: "/images/products/rustico/color-100-natur.jpg"
+  - name: "구리색"
+    image: "/images/products/rustico/color-200-kupfer.jpg"
+  - name: "올드그레이"
+    image: "/images/products/rustico/color-215-altgrau.jpg"
+  - name: "토스카나"
+    image: "/images/products/rustico/color-244-toskana.jpg"
 specs:
-  - label: "재질"
-    value: "점토 (천연 원료)"
-  - label: "소성"
-    value: "1,000℃ 이상 고온 소성"
   - label: "정미치수"
-    value: "확인 중"
-  - label: "소요 매수"
-    value: "확인 중 (매/㎡)"
-  - label: "색상·마감"
-    value: "내추럴 · 엥고베 · 유약"
-gallery: []
+    value: "약 225 × 405 mm"
+  - label: "커버 폭 (최소/평균/최대)"
+    value: "약 198 / 200 / 202 mm"
+  - label: "커버 길이 (최소/평균/최대)"
+    value: "약 328 / 338 / 348 mm"
+  - label: "소요 매수/㎡ (최소/평균/최대)"
+    value: "약 14.2 / 14.7 / 15.3 매"
+  - label: "무게"
+    value: "개당 약 3.1 kg · ㎡당 약 45.6 kg"
+  - label: "팔레트당 무게"
+    value: "769 kg"
+  - label: "최소 지붕 경사"
+    value: "18° (추가 조치 필요)"
+gallery:
+  - "/images/products/rustico/case-1.jpg"
+  - "/images/products/rustico/case-2.jpg"
 draft: false
 ---
 
 ## RUSTICO 루스티코
 
-러스틱한 질감의 이중관형 기와.
+소박한 형태 디자인(rustikale Formgebung)이 특징인 팔츠 기와입니다. 최대 21mm의 유연한 커버 크기로 리노베이션에 이상적이며, 이중 홈으로 우수한 배수 기능을 갖췄습니다.
 
-CREATON **이중관형기와** 라인의 제품으로, 천연 점토를 1,000℃ 이상 고온에서 소성해 강도와 내구성을 확보했습니다.
-
-> 아래 색상 스와치·규격 값·시공 사진은 예시/자리표시이며, 본사 자료로 교체 예정입니다.
+대칭 배치된 홈이 만들어내는 소박한 매력의 4가지 색상 라인입니다.

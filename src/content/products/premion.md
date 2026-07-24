@@ -4,35 +4,59 @@ titleEn: "PREMION"
 category: "낮은 골기와"
 categoryOrder: 1
 order: 3
-summary: "큰 포맷과 깊이감 있는 마감으로 프리미엄 지붕을 완성하는 대형 기와."
+summary: "KERALIS 공법의 견고함과 12가지 색상으로 완성하는 프리미엄 대형 로우 프로파일 기와."
+image: "/images/products/premion/hero.jpg"
 colors:
   - name: "내추럴 레드"
-    hex: "#a83a2a"
-  - name: "엥고베 브라운"
-    hex: "#5a3a2a"
-  - name: "엥고베 안트라사이트"
-    hex: "#26292b"
-  - name: "유약 블랙"
-    hex: "#141719"
+    image: "/images/products/premion/color-100-natur.jpg"
+  - name: "구리색"
+    image: "/images/products/premion/color-nu-200-kupfer.jpg"
+  - name: "브라운"
+    image: "/images/products/premion/color-208-braun.jpg"
+  - name: "망간 무광"
+    image: "/images/products/premion/color-nu-221-mangan.jpg"
+  - name: "슬레이트그레이"
+    image: "/images/products/premion/color-nu-418-schief.jpg"
+  - name: "무광블랙"
+    image: "/images/products/premion/color-nu-821-schw-matt.jpg"
+  - name: "와인레드 (유광)"
+    image: "/images/products/premion/color-507-weinrot-fin.jpg"
+  - name: "브라운 (유광)"
+    image: "/images/products/premion/color-502-braun-fin.jpg"
+  - name: "에델블랙 (유광)"
+    image: "/images/products/premion/color-503-schw-fin.jpg"
+  - name: "체스트넛 (유광)"
+    image: "/images/products/premion/color-512-kastanie-fin.jpg"
+  - name: "크리스탈블랙 (프리미엄 유광)"
+    image: "/images/products/premion/color-606-krist-schw-nob.jpg"
+  - name: "크리스탈슬레이트 (프리미엄 유광)"
+    image: "/images/products/premion/color-607-krist-schief-nob.jpg"
 specs:
-  - label: "재질"
-    value: "점토 (천연 원료)"
-  - label: "소성"
-    value: "1,000℃ 이상 고온 소성"
   - label: "정미치수"
-    value: "확인 중"
-  - label: "소요 매수"
-    value: "확인 중 (매/㎡)"
-  - label: "색상·마감"
-    value: "내추럴 · 엥고베 · 유약"
-gallery: []
+    value: "약 280 × 460 mm"
+  - label: "커버 폭 (최소/평균/최대)"
+    value: "222 / 225 / 228 mm"
+  - label: "커버 길이 (최소/평균/최대)"
+    value: "357 / 368 / 379 mm"
+  - label: "소요 매수/㎡ (최소/평균/최대)"
+    value: "11.6 / 12.1 / 12.6 매"
+  - label: "무게"
+    value: "개당 3.5 kg · ㎡당 42.4 kg"
+  - label: "팔레트당 무게"
+    value: "865 kg"
+  - label: "최소 지붕 경사"
+    value: "7° (방수 언더루핑 시) · 규정 14° 이상"
+gallery:
+  - "/images/products/premion/case-1.jpg"
+  - "/images/products/premion/case-2.jpg"
+  - "/images/products/premion/case-3.jpg"
 draft: false
 ---
 
 ## PREMION 프레미온
 
-큰 포맷과 깊이감 있는 마감으로 프리미엄 지붕을 완성하는 대형 기와.
+높은 연소 등급을 갖춘 플랫 루프 타일로, KERALIS 생산 공법을 통한 우수한 품질과 내구성이 특징입니다.
 
-CREATON **낮은 골기와** 라인의 제품으로, 천연 점토를 1,000℃ 이상 고온에서 소성해 강도와 내구성을 확보했습니다.
+타일당 23mm의 큰 슬라이딩 범위와 미로 기술이 적용된 수직 폴드로 강한 바람 압력에서도 방수 성능을 보장하며, 방수 루핑 시스템 적용 시 7°의 매우 낮은 경사에도 시공할 수 있습니다.
 
-> 아래 색상 스와치·규격 값·시공 사진은 예시/자리표시이며, 본사 자료로 교체 예정입니다.
+12가지 색상, 4가지 표면 변형(무광·유광·프리미엄 유광)으로 폭넓은 선택지를 제공합니다.

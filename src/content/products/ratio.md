@@ -4,35 +4,55 @@ titleEn: "RATIO"
 category: "이중관형기와"
 categoryOrder: 4
 order: 1
-summary: "규칙적인 이중관 형태의 기와."
+summary: "265 x 446mm 대형 포맷의 경제적인 팔츠 기와 — 11가지 색상, 4가지 표면 변형."
+image: "/images/products/ratio/hero.jpg"
 colors:
   - name: "내추럴 레드"
-    hex: "#a83a2a"
-  - name: "엥고베 브라운"
-    hex: "#5a3a2a"
-  - name: "엥고베 안트라사이트"
-    hex: "#26292b"
-  - name: "유약 블랙"
-    hex: "#141719"
+    image: "/images/products/ratio/color-100-natur.jpg"
+  - name: "구리색"
+    image: "/images/products/ratio/color-200-kupfer.jpg"
+  - name: "레드"
+    image: "/images/products/ratio/color-201-rot.jpg"
+  - name: "와인레드"
+    image: "/images/products/ratio/color-202-weinrot.jpg"
+  - name: "올드그레이"
+    image: "/images/products/ratio/color-215-altgrau.jpg"
+  - name: "안트라사이트"
+    image: "/images/products/ratio/color-220-anthra.jpg"
+  - name: "레드 (유광)"
+    image: "/images/products/ratio/color-501-rot-fin.jpg"
+  - name: "에델블랙 (유광)"
+    image: "/images/products/ratio/color-503-schw-fin.jpg"
+  - name: "와인레드 (유광)"
+    image: "/images/products/ratio/color-507-weinrot-fin.jpg"
+  - name: "체스트넛 (유광)"
+    image: "/images/products/ratio/color-512-kastanie-fin.jpg"
+  - name: "앤틱 (프리미엄 유광)"
+    image: "/images/products/ratio/color-611-antik-nob.jpg"
 specs:
-  - label: "재질"
-    value: "점토 (천연 원료)"
-  - label: "소성"
-    value: "1,000℃ 이상 고온 소성"
   - label: "정미치수"
-    value: "확인 중"
-  - label: "소요 매수"
-    value: "확인 중 (매/㎡)"
-  - label: "색상·마감"
-    value: "내추럴 · 엥고베 · 유약"
-gallery: []
+    value: "약 265 × 446 mm"
+  - label: "커버 폭 (최소/평균/최대)"
+    value: "221 / 223 / 225 mm"
+  - label: "커버 길이 (최소/평균/최대)"
+    value: "357 / 368 / 380 mm"
+  - label: "소요 매수/㎡ (최소/평균/최대)"
+    value: "11.7 / 12.2 / 12.7 매"
+  - label: "무게"
+    value: "개당 3.3 kg · ㎡당 40.3 kg"
+  - label: "팔레트당 무게"
+    value: "975 kg"
+  - label: "최소 지붕 경사"
+    value: "18°"
+gallery:
+  - "/images/products/ratio/case-1.jpg"
+  - "/images/products/ratio/case-2.jpg"
+  - "/images/products/ratio/case-3.jpg"
 draft: false
 ---
 
 ## RATIO 라티오
 
-규칙적인 이중관 형태의 기와.
+265 x 446mm의 대형 포맷으로 높은 경제성을 제공하는 팔츠(이중관형) 기와입니다. 24mm의 이동 범위로 빠른 시공이 가능하며, 측면 물 분리기 구조로 최적의 물 흐름을 확보했습니다.
 
-CREATON **이중관형기와** 라인의 제품으로, 천연 점토를 1,000℃ 이상 고온에서 소성해 강도와 내구성을 확보했습니다.
-
-> 아래 색상 스와치·규격 값·시공 사진은 예시/자리표시이며, 본사 자료로 교체 예정입니다.
+11가지 색상, 4가지 표면 변형(무광 엥고베·유광·프리미엄 유광)으로 다양한 지붕 스타일에 대응합니다.
