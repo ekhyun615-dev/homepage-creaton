@@ -2,10 +2,10 @@
 import { getCollection } from 'astro:content';
 
 const nav = [
-  { label: '브랜드 소개', href: '/about' },
   { label: '제품', href: '/products', mega: true },
   { label: '시공 사례', href: '/references' },
   { label: '기술자료', href: '/downloads' },
+  { label: '브랜드 소개', href: '/about' },
 ];
 
 // 제품 카테고리 → 제품 목록 (메가메뉴용)
@@ -37,7 +37,6 @@ const isActive = (href: string) =>
   <div class="container header-inner">
     <a href="/" class="brand" aria-label="CREATON Korea 홈">
       <img src="/images/creaton-logo.png" alt="CREATON · wienerberger" class="brand-logo" width="252" height="100" />
-      <span class="brand-sub">KOREA</span>
     </a>
 
     <nav class="nav-desktop" aria-label="주요 메뉴">
@@ -141,7 +140,7 @@ const isActive = (href: string) =>
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 76px;
+    height: 84px;
   }
   .brand {
     display: flex;
@@ -150,15 +149,7 @@ const isActive = (href: string) =>
     font-weight: 800;
     letter-spacing: 0.02em;
   }
-  .brand-logo { height: 44px; width: auto; display: block; }
-  .brand-sub {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--c-slate);
-    letter-spacing: 0.18em;
-    align-self: center;
-    padding-bottom: 4px;
-  }
+  .brand-logo { height: 56px; width: auto; display: block; }
   .nav-desktop { display: none; gap: 28px; }
   .nav-item { position: static; }
   .nav-link {
