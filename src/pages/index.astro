@@ -10,6 +10,13 @@ const references = (await getCollection('references', ({ data }) => !data.draft)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 
+const heroSlides = [
+  '/images/hero/hero-1-modern.jpg',
+  '/images/hero/hero-2-blue.jpg',
+  '/images/hero/hero-3-red.jpg',
+  '/images/hero/hero-4-green.jpg',
+];
+
 const pillars = [
   {
     title: '140년 독일 기술력',
@@ -28,7 +35,16 @@ const pillars = [
 
 <BaseLayout>
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="hero">
+    <div class="hero-slides">
+      {heroSlides.map((src, i) => (
+        <div
+          class:list={['hero-slide', i === 0 && 'is-active']}
+          style={`background-image:url(${src})`}
+          data-hero-slide={i}
+        />
+      ))}
+    </div>
     <div class="hero-overlay"></div>
     <div class="container hero-inner">
       <span class="eyebrow" style="color:#ffd9df">SINCE 1884 · GERMANY</span>
@@ -43,6 +59,16 @@ const pillars = [
         <a href="/products" class="btn btn-primary">제품 살펴보기</a>
         <a href="/contact" class="btn btn-ghost">상담 문의하기</a>
       </div>
+    </div>
+    <div class="hero-dots" role="tablist" aria-label="히어로 이미지 전환">
+      {heroSlides.map((_, i) => (
+        <button
+          type="button"
+          class:list={['hero-dot', i === 0 && 'is-active']}
+          data-hero-dot={i}
+          aria-label={`${i + 1}번째 이미지 보기`}
+        />
+      ))}
     </div>
   </section>
 
@@ -146,17 +172,44 @@ const pillars = [
     min-height: 82vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #2a2018 0%, #47372b 55%, #6b4a34 100%);
+    background: #2a2018;
     color: #fff;
     overflow: hidden;
   }
+  .hero-slides { position: absolute; inset: 0; }
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+  .hero-slide.is-active { opacity: 1; }
   .hero-overlay {
     position: absolute; inset: 0;
     background:
       radial-gradient(120% 90% at 80% 10%, rgba(200,16,46,0.28), transparent 60%),
-      linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.45));
+      linear-gradient(180deg, rgba(20,15,12,0.35), rgba(20,15,12,0.65));
   }
   .hero-inner { position: relative; padding-block: 80px; max-width: 780px; }
+  .hero-dots {
+    position: absolute;
+    left: 0; right: 0; bottom: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .hero-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.25);
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .hero-dot.is-active { background: #fff; transform: scale(1.15); }
   .hero-title {
     font-size: clamp(2rem, 6vw, 3.6rem);
     color: #fff;
@@ -231,3 +284,34 @@ const pillars = [
   .cta-inner h2 { color: #fff; font-size: clamp(1.4rem, 3.5vw, 2rem); }
   .cta-inner p { color: rgba(255, 255, 255, 0.8); margin: 0; }
 </style>
+
+<script>
+  const heroEl = document.getElementById('hero');
+  if (heroEl) {
+    const slides = Array.from(heroEl.querySelectorAll<HTMLElement>('[data-hero-slide]'));
+    const dots = Array.from(heroEl.querySelectorAll<HTMLButtonElement>('[data-hero-dot]'));
+    let current = 0;
+    let timer: ReturnType<typeof setInterval>;
+
+    const show = (idx: number) => {
+      current = (idx + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('is-active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
+    };
+
+    const start = () => {
+      timer = setInterval(() => show(current + 1), 5000);
+    };
+    const stop = () => clearInterval(timer);
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        show(Number(dot.dataset.heroDot));
+        stop();
+        start();
+      });
+    });
+
+    if (slides.length > 1) start();
+  }
+</script>
