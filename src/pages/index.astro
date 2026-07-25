@@ -2,9 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const products = (await getCollection('products', ({ data }) => !data.draft))
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 3);
+const featuredSlugs = ['futura', 'domino', 'klassik'];
+const allProducts = await getCollection('products', ({ data }) => !data.draft);
+const products = featuredSlugs
+  .map((slug) => allProducts.find((p) => p.slug === slug))
+  .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
 const references = (await getCollection('references', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order)
