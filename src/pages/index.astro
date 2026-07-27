@@ -186,14 +186,24 @@ const pillars = [
     background-size: cover;
     background-position: center;
     opacity: 0;
+    transform: scale(1);
     transition: opacity 1.4s ease;
+    animation: hero-kenburns 22s ease-in-out infinite;
   }
   .hero-slide.is-active { opacity: 1; }
+  @keyframes hero-kenburns {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.09); }
+    100% { transform: scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slide { animation: none; }
+  }
   .hero-overlay {
     position: absolute; inset: 0;
     background:
-      radial-gradient(120% 90% at 80% 10%, rgba(200,16,46,0.28), transparent 60%),
-      linear-gradient(180deg, rgba(20,15,12,0.35), rgba(20,15,12,0.65));
+      linear-gradient(90deg, rgba(20,24,26,0.82) 0%, rgba(20,24,26,0.55) 42%, rgba(20,24,26,0.18) 72%, rgba(20,24,26,0) 100%),
+      linear-gradient(0deg, rgba(20,24,26,0.5) 0%, rgba(20,24,26,0.1) 40%);
   }
   .hero-inner { position: relative; padding-block: 80px; max-width: 780px; }
   .hero-dots {
