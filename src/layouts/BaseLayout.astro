@@ -56,6 +56,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       url: 'https://www.creaton.kr',
       description: description,
       areaServed: 'KR',
+      telephone: '1833-2190',
+      email: 'info@alcmate.com',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '태장로 741, 경동미르웰시티 534호',
+        addressLocality: '김포시',
+        addressRegion: '경기도',
+        addressCountry: 'KR',
+      },
     })} />
   </head>
   <body>

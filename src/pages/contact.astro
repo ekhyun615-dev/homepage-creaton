@@ -1,5 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// 상담 신청은 FormSubmit.co 를 통해 info@alcmate.com 으로 전달됩니다.
+// (별도 가입 불필요 · 최초 1회 확인 이메일 인증 후 활성화 — Gaulhofer Korea 사이트와 동일 방식)
+const FORM_ENDPOINT = 'https://formsubmit.co/info@alcmate.com';
 ---
 
 <BaseLayout
@@ -21,18 +25,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- 빠른 연락 -->
       <div class="contact-side">
         <h2>바로 연락하기</h2>
-        <!-- TODO: 실제 연락처/주소/카카오채널로 교체 -->
-        <a href="tel:0221683333" class="contact-item">
+        <a href="tel:1833-2190" class="contact-item">
           <span class="ci-label">전화</span>
-          <strong>02-2168-3333</strong>
+          <strong>1833-2190</strong>
         </a>
-        <a href="mailto:info@creaton.kr" class="contact-item">
+        <a href="mailto:info@alcmate.com" class="contact-item">
           <span class="ci-label">이메일</span>
-          <strong>info@creaton.kr</strong>
+          <strong>info@alcmate.com</strong>
         </a>
         <div class="contact-item">
           <span class="ci-label">주소</span>
-          <strong>경기도 김포시 (주소 확인 후 교체)</strong>
+          <strong>경기도 김포시 태장로 741, 경동미르웰시티 534호</strong>
         </div>
         <div class="contact-item">
           <span class="ci-label">운영시간</span>
@@ -43,8 +46,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- 문의 폼 -->
       <div class="contact-form-wrap">
         <h2>온라인 문의</h2>
-        <!-- TODO: action 을 실제 폼 처리 서비스(Formspree/Web3Forms 등) 또는 자체 API로 교체하세요. -->
-        <form class="contact-form" action="#" method="POST">
+        <form class="contact-form" id="contact-form" action={FORM_ENDPOINT} method="POST">
+          <!-- FormSubmit 설정 -->
+          <input type="hidden" name="_subject" value="[CREATON Korea] 새 상담 신청" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_next" value="/contact/thanks" data-next-path="/contact/thanks" />
+          <input type="hidden" name="_captcha" value="false" />
+          <!-- 스팸 봇 트랩 (사람에겐 보이지 않음) -->
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
           <div class="field">
             <label for="name">이름 <span>*</span></label>
             <input id="name" name="name" type="text" required placeholder="홍길동" />
@@ -73,10 +83,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <textarea id="message" name="message" rows="5" required placeholder="현장 위치, 지붕 면적, 원하시는 제품 등을 적어주시면 상담에 도움이 됩니다."></textarea>
           </div>
           <label class="agree">
-            <input type="checkbox" required />
+            <input type="checkbox" name="privacy" required />
             <span>개인정보 수집 및 이용에 동의합니다. (상담 목적 외 사용하지 않습니다.)</span>
           </label>
           <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">문의 보내기</button>
+          <p class="form-note">
+            제출이 어려우신 경우 <a href="tel:1833-2190">1833-2190</a> 또는
+            <a href="mailto:info@alcmate.com">info@alcmate.com</a> 로 문의해 주세요.
+          </p>
         </form>
       </div>
     </div>
@@ -118,9 +132,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
   .agree { display: flex; gap: 10px; align-items: flex-start; font-size: 0.85rem; color: var(--c-slate); }
   .agree input { margin-top: 3px; }
+  .form-note { margin: 4px 0 0; font-size: 0.85rem; color: var(--c-muted); text-align: center; }
+  .form-note a { color: var(--c-red); font-weight: 700; }
 
   @media (min-width: 820px) {
     .contact-grid { grid-template-columns: 320px 1fr; gap: 56px; }
     .row { grid-template-columns: 1fr 1fr; }
   }
 </style>
+
+<script>
+  // 폼 제출 후 이동할 완료 페이지를 현재 도메인 기준 절대경로로 설정
+  const next = document.querySelector<HTMLInputElement>('input[name="_next"][data-next-path]');
+  if (next) next.value = window.location.origin + (next.dataset.nextPath ?? '/contact/thanks');
+</script>
