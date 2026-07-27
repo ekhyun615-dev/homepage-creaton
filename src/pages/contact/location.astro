@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const address = '경기도 김포시 태장로 741, 경동미르웰시티 534호';
+const mapQuery = encodeURIComponent('경기도 김포시 태장로 741 경동미르웰시티');
+const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+---
+
+<BaseLayout
+  title="오시는 길 | CREATON Korea"
+  description="CREATON Korea 한국 공식 파트너 오시는 길 - 경기도 김포시 태장로 741, 경동미르웰시티 534호."
+>
+  <section class="page-hero bg-ink">
+    <div class="container">
+      <span class="eyebrow" style="color:#ff9aa8">LOCATION</span>
+      <h1>오시는 길</h1>
+      <p class="lead" style="color:rgba(255,255,255,.82)">
+        방문 상담을 원하시면 미리 전화 주시면 더 편하게 안내해 드립니다.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container location-grid">
+      <div class="map-wrap">
+        <iframe
+          class="map-frame"
+          src={mapEmbedSrc}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="CREATON Korea 오시는 길 지도"
+        ></iframe>
+      </div>
+
+      <div class="location-info">
+        <h2>찾아오시는 방법</h2>
+        <div class="info-item">
+          <span class="ci-label">주소</span>
+          <strong>{address}</strong>
+        </div>
+        <div class="info-item">
+          <span class="ci-label">전화</span>
+          <a href="tel:1833-2190"><strong>1833-2190</strong></a>
+        </div>
+        <div class="info-item">
+          <span class="ci-label">이메일</span>
+          <a href="mailto:info@alcmate.com"><strong>info@alcmate.com</strong></a>
+        </div>
+        <div class="info-item">
+          <span class="ci-label">운영시간</span>
+          <strong>평일 09:00 – 18:00</strong>
+        </div>
+        <a
+          href={`https://map.kakao.com/link/search/${encodeURIComponent(address)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-outline"
+          style="width:100%;justify-content:center;margin-top:8px"
+        >
+          카카오맵에서 길찾기
+        </a>
+        <a href="/contact" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:10px">
+          상담 문의하기
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero { padding-block: clamp(56px, 9vw, 96px); }
+  .page-hero h1 { color: #fff; font-size: clamp(1.8rem, 5vw, 2.8rem); }
+
+  .location-grid {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .map-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--c-line);
+  }
+  .map-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  .location-info h2 { font-size: 1.3rem; margin-bottom: 18px; }
+  .info-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--c-line);
+  }
+  .info-item a { display: block; }
+  .ci-label { display: block; font-size: 0.78rem; color: var(--c-muted); margin-bottom: 4px; }
+  .info-item strong { font-size: 1.05rem; font-weight: 600; }
+  .info-item a:hover strong { color: var(--c-red); }
+
+  @media (min-width: 900px) {
+    .location-grid { grid-template-columns: 1.4fr 1fr; gap: 48px; }
+    .map-wrap { aspect-ratio: auto; height: 100%; min-height: 460px; }
+  }
+</style>

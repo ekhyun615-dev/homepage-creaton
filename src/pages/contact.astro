@@ -33,10 +33,11 @@ const FORM_ENDPOINT = 'https://formsubmit.co/info@alcmate.com';
           <span class="ci-label">이메일</span>
           <strong>info@alcmate.com</strong>
         </a>
-        <div class="contact-item">
+        <a href="/contact/location" class="contact-item">
           <span class="ci-label">주소</span>
           <strong>경기도 김포시 태장로 741, 경동미르웰시티 534호</strong>
-        </div>
+          <span class="ci-sub">지도로 오시는 길 보기 →</span>
+        </a>
         <div class="contact-item">
           <span class="ci-label">운영시간</span>
           <strong>평일 09:00 – 18:00</strong>
@@ -108,6 +109,7 @@ const FORM_ENDPOINT = 'https://formsubmit.co/info@alcmate.com';
     border-bottom: 1px solid var(--c-line);
   }
   .ci-label { display: block; font-size: 0.78rem; color: var(--c-muted); margin-bottom: 4px; }
+  .ci-sub { display: block; font-size: 0.82rem; color: var(--c-red); margin-top: 4px; font-weight: 600; }
   .contact-item strong { font-size: 1.05rem; font-weight: 600; }
   a.contact-item:hover strong { color: var(--c-red); }
 

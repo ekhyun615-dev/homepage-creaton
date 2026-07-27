@@ -1,0 +1,36 @@
+<div class="top-bar">
+  <div class="container top-bar-inner">
+    <span class="top-bar-brand">
+      <strong>독일 CREATON 점토기와</strong> 한국 공식 파트너
+    </span>
+    <div class="top-bar-links">
+      <a href="tel:1833-2190">T. 1833-2190</a>
+      <a href="mailto:info@alcmate.com">info@alcmate.com</a>
+      <a href="/contact/location">오시는 길</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .top-bar {
+    background: var(--c-ink);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.8rem;
+    display: none;
+  }
+  .top-bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    height: 38px;
+  }
+  .top-bar-brand strong { color: #fff; font-weight: 700; }
+  .top-bar-links { display: flex; align-items: center; gap: 20px; }
+  .top-bar-links a { color: rgba(255, 255, 255, 0.75); white-space: nowrap; }
+  .top-bar-links a:hover { color: #fff; }
+
+  @media (min-width: 720px) {
+    .top-bar { display: block; }
+  }
+</style>
