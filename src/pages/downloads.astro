@@ -1,11 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// TODO: 실제 카탈로그/시공가이드 PDF를 public/downloads/ 에 넣고 아래 목록을 교체하세요.
-const files = [
-  { title: 'CREATON 제품 카탈로그', desc: '전체 기와 라인업 및 색상 안내', size: 'PDF · 준비중', href: '#' },
-  { title: '시공 가이드', desc: '지붕 시공 표준 및 시공 디테일', size: 'PDF · 준비중', href: '#' },
-  { title: '제품 규격서', desc: '치수·중량·기술 사양', size: 'PDF · 준비중', href: '#' },
+const sections = [
+  {
+    title: '종합 카탈로그',
+    files: [
+      { title: 'CREATON 기와 종합카탈로그 (2024)', desc: '전체 기와 라인업 및 색상 안내', size: '14 MB', href: '/downloads/creaton-catalog-2024.pdf' },
+    ],
+  },
+  {
+    title: '제품별 카탈로그',
+    files: [
+      { title: 'FUTURA 카탈로그', desc: '낮은 골기와', size: '11.8 MB', href: '/downloads/catalog-futura.pdf' },
+      { title: 'HARMONIE 카탈로그', desc: '낮은 골기와', size: '4.2 MB', href: '/downloads/catalog-harmonie.pdf' },
+      { title: 'MIKADO 카탈로그', desc: '평기와', size: '2.0 MB', href: '/downloads/catalog-mikado.pdf' },
+      { title: 'DOMINO 카탈로그', desc: '평기와', size: '2.1 MB', href: '/downloads/catalog-domino.pdf' },
+      { title: 'VISIO 카탈로그', desc: '평기와', size: '3.3 MB', href: '/downloads/catalog-visio.pdf' },
+      { title: 'KLASSIK · BIBER 카탈로그', desc: '평판 기와', size: '23.5 MB', href: '/downloads/catalog-klassik-biber.pdf' },
+      { title: 'MAGNUM 카탈로그', desc: '콘크리트 기와', size: '2.1 MB', href: '/downloads/catalog-magnum.pdf' },
+    ],
+  },
+  {
+    title: '기술자료 (TDS) · 시공 매뉴얼',
+    files: [
+      { title: 'DUO extra 투습방수지 기술자료', desc: '지붕 하부 투습방수지', size: '0.9 MB', href: '/downloads/tds-duo-extra.pdf' },
+      { title: 'TRIO extra 투습방수지 기술자료', desc: '지붕 하부 투습방수지', size: '1.0 MB', href: '/downloads/tds-trio-extra.pdf' },
+      { title: '시스템 솔라 브라켓 셋트 설치매뉴얼', desc: '태양광 마운팅 브라켓 시공 안내', size: '6.5 MB', href: '/downloads/manual-solar-bracket.pdf' },
+    ],
+  },
 ];
 ---
 
@@ -25,20 +47,25 @@ const files = [
 
   <section class="section">
     <div class="container narrow">
-      <ul class="file-list">
-        {files.map((f) => (
-          <li>
-            <a href={f.href} class="file-row" download>
-              <div class="file-icon">PDF</div>
-              <div class="file-info">
-                <strong>{f.title}</strong>
-                <span>{f.desc}</span>
-              </div>
-              <span class="file-size">{f.size}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      {sections.map((sec) => (
+        <div class="file-section">
+          <h2 class="file-section-title">{sec.title}</h2>
+          <ul class="file-list">
+            {sec.files.map((f) => (
+              <li>
+                <a href={f.href} class="file-row" download>
+                  <div class="file-icon">PDF</div>
+                  <div class="file-info">
+                    <strong>{f.title}</strong>
+                    <span>{f.desc}</span>
+                  </div>
+                  <span class="file-size">{f.size}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
       <p class="note">※ 원하시는 자료가 없으신가요? <a href="/contact">문의하기</a>를 통해 요청해 주세요.</p>
     </div>
   </section>
@@ -48,6 +75,8 @@ const files = [
   .page-hero { padding-block: clamp(56px, 9vw, 96px); }
   .page-hero h1 { color: #fff; font-size: clamp(1.8rem, 5vw, 2.8rem); }
   .narrow { max-width: 760px; }
+  .file-section { margin-bottom: 40px; }
+  .file-section-title { font-size: 1.1rem; margin-bottom: 16px; }
   .file-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
   .file-row {
     display: flex; align-items: center; gap: 18px;
