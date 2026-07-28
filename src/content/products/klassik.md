@@ -55,6 +55,9 @@ specs:
 gallery:
   - "/images/products/klassik/case-1.jpg"
   - "/images/products/klassik/case-2.jpg"
+  - "/images/products/klassik/case-3.jpg"
+  - "/images/products/klassik/case-4.jpg"
+  - "/images/products/klassik/case-5.jpg"
 draft: false
 ---
 
