@@ -44,6 +44,10 @@ specs:
     value: "A1"
   - label: "흡수율"
     value: "약 6 %"
+gallery:
+  - "/images/products/motio/case-1.jpg"
+  - "/images/products/motio/case-2.jpg"
+  - "/images/products/motio/case-3.jpg"
 draft: false
 ---
 
