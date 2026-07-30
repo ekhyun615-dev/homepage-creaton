@@ -49,7 +49,6 @@ specs:
 gallery:
   - "/images/products/premion/case-1.jpg"
   - "/images/products/premion/case-2.jpg"
-  - "/images/products/premion/case-3.jpg"
 draft: false
 ---
 

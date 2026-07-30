@@ -55,6 +55,20 @@ specs:
 gallery:
   - "/images/products/futura/case-1.jpg"
   - "/images/products/futura/case-2.jpg"
+  - "/images/products/futura/case-3.jpg"
+  - "/images/products/futura/case-4.jpg"
+  - "/images/products/futura/case-5.jpg"
+  - "/images/products/futura/case-6.jpg"
+  - "/images/products/futura/case-7.jpg"
+  - "/images/products/futura/case-8.jpg"
+  - "/images/products/futura/case-9.jpg"
+  - "/images/products/futura/case-10.jpg"
+  - "/images/products/futura/case-11.jpg"
+  - "/images/products/futura/case-12.jpg"
+  - "/images/products/futura/case-13.jpg"
+  - "/images/products/futura/case-14.jpg"
+  - "/images/products/futura/case-15.jpg"
+  - "/images/products/futura/case-16.jpg"
 draft: false
 ---
 

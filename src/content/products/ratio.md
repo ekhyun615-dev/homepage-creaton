@@ -46,8 +46,6 @@ specs:
     value: "18°"
 gallery:
   - "/images/products/ratio/case-1.jpg"
-  - "/images/products/ratio/case-2.jpg"
-  - "/images/products/ratio/case-3.jpg"
 draft: false
 ---
 

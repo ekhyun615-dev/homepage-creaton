@@ -58,6 +58,9 @@ gallery:
   - "/images/products/klassik/case-3.jpg"
   - "/images/products/klassik/case-4.jpg"
   - "/images/products/klassik/case-5.jpg"
+  - "/images/products/klassik/case-6.jpg"
+  - "/images/products/klassik/case-7.jpg"
+  - "/images/products/klassik/case-8.jpg"
 draft: false
 ---
 

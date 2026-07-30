@@ -42,6 +42,11 @@ gallery:
   - "/images/products/domino/case-1.jpg"
   - "/images/products/domino/case-2.jpg"
   - "/images/products/domino/case-3.jpg"
+  - "/images/products/domino/case-4.jpg"
+  - "/images/products/domino/case-5.jpg"
+  - "/images/products/domino/case-6.jpg"
+  - "/images/products/domino/case-7.jpg"
+  - "/images/products/domino/case-8.jpg"
 draft: false
 ---
 
