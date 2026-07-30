@@ -16,6 +16,7 @@ const meta = [
   ['적용 제품', d.product],
   ['시공 시기', d.date],
 ].filter(([, v]) => v);
+const hasGallery = d.gallery && d.gallery.length > 1;
 ---
 
 <BaseLayout title={`${d.title} | 시공 사례 | CREATON Korea`} description={`${d.title} — ${[d.location, d.buildingType].filter(Boolean).join(', ')}`}>
@@ -33,6 +34,25 @@ const meta = [
       <div class="container ref-body">
         <div class="prose">
           <Content />
+
+          {hasGallery && (
+            <div class="slider" data-slider>
+              <div class="slides">
+                {d.gallery!.map((src, i) => (
+                  <div class="slide" data-index={i}>
+                    <img src={src} alt={`${d.title} 시공 사진 ${i + 1}`} loading="lazy" />
+                  </div>
+                ))}
+              </div>
+              <button class="slider-btn prev" aria-label="이전 사진" data-prev>‹</button>
+              <button class="slider-btn next" aria-label="다음 사진" data-next>›</button>
+              <div class="slider-dots" data-dots>
+                {d.gallery!.map((_, i) => (
+                  <button class="dot" data-dot={i} aria-label={`${i + 1}번 사진`}></button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
         <aside class="ref-meta-box">
           <h4>프로젝트 정보</h4>
@@ -75,4 +95,40 @@ const meta = [
   .ref-meta-box dt { color: var(--c-muted); font-size: 0.85rem; }
   .ref-meta-box dd { margin: 0; font-size: 0.9rem; font-weight: 500; }
   @media (min-width: 860px) { .ref-body { grid-template-columns: 1fr 300px; } }
+
+  /* 시공 사진 슬라이더 */
+  .slider { position: relative; margin-top: 32px; border-radius: var(--radius); overflow: hidden; background: var(--c-bg-clay); }
+  .slides { display: flex; transition: transform 0.35s ease; }
+  .slide { min-width: 100%; aspect-ratio: 16 / 10; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; }
+  .slider-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.9); border: none; cursor: pointer;
+    font-size: 1.6rem; line-height: 1; color: var(--c-ink);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .slider-btn.prev { left: 12px; }
+  .slider-btn.next { right: 12px; }
+  .slider-dots { position: absolute; bottom: 12px; left: 0; right: 0; display: flex; gap: 8px; justify-content: center; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; border: none; background: rgba(255,255,255,0.6); cursor: pointer; padding: 0; }
+  .dot.active { background: #fff; }
 </style>
+
+<script>
+  document.querySelectorAll('[data-slider]').forEach((slider) => {
+    const slides = slider.querySelector('.slides') as HTMLElement | null;
+    const total = slider.querySelectorAll('.slide').length;
+    const dots = slider.querySelectorAll('[data-dot]');
+    let idx = 0;
+    const go = (n: number) => {
+      idx = (n + total) % total;
+      if (slides) slides.style.transform = `translateX(-${idx * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    };
+    slider.querySelector('[data-prev]')?.addEventListener('click', () => go(idx - 1));
+    slider.querySelector('[data-next]')?.addEventListener('click', () => go(idx + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+    go(0);
+  });
+</script>

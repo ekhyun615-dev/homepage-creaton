@@ -39,6 +39,8 @@ const references = defineCollection({
     buildingType: z.string().optional(),
     product: z.string().optional(),
     image: z.string().optional(),
+    // 여러 장의 시공 사진(슬라이드) — 없으면 image 한 장만 표시
+    gallery: z.array(z.string()).optional(),
     date: z.string().optional(),
     order: z.number().default(0),
     draft: z.boolean().default(false),
