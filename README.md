@@ -37,6 +37,7 @@ npm install      # 최초 1회 의존성 설치
 npm run dev      # 개발 서버 (http://localhost:4321)
 npm run build    # 정적 빌드 → dist/
 npm run preview  # 빌드 결과 미리보기
+npm run zip      # 빌드 후 카페24 업로드용 creaton-korea-deploy.zip 생성
 ```
 
 ## ✍️ 콘텐츠 추가 방법 (코드 몰라도 가능)
@@ -82,9 +83,10 @@ gallery:                      # 시공 사진(슬라이드) — 이미지 경로
 - [ ] **기존 creaton.kr URL → 신규 URL 301 리다이렉트 매핑** (SEO 유실 방지)
 - [ ] 개인정보처리방침 페이지
 
-## 🚀 배포(제안)
+## 🚀 배포
 
-- 정적 사이트이므로 **Vercel / Netlify / Cloudflare Pages** 등에 무료·간편 배포 가능
+- **호스팅**: 카페24 웹호스팅 (정적 파일 업로드) — [DEPLOY.md](./DEPLOY.md) 참고 (Gaulhofer/FAKOHAUS Korea와 동일 방식)
+- 수정 후 배포하려면 `npm run zip` → 결과 zip을 카페24에 업로드
 - 배포 후 도메인 `www.creaton.kr` 연결 → 네이버/구글에 사이트맵 제출
 
 ## 📌 다음 단계

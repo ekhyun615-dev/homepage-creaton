@@ -8,7 +8,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "zip": "npm run build && pwsh -NoProfile -File ./scripts/make-zip.ps1"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",

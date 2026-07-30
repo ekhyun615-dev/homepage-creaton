@@ -19,6 +19,9 @@ pnpm-debug.log*
 .env.production
 .env.local
 
+# 배포 산출물 (npm run zip 결과)
+creaton-korea-deploy.zip
+
 # macOS / editor
 .DS_Store
 .vscode/

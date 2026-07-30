@@ -1,0 +1,83 @@
+# ============================================================
+# CREATON Korea – Apache 설정 (카페24 웹호스팅용)
+# 각 블록은 <IfModule> 로 감싸져 있어, 해당 모듈이 없으면
+# 그냥 무시됩니다 (500 에러 방지).
+# ============================================================
+
+# --- 기본 문서 & 인코딩 ---
+DirectoryIndex index.html
+AddDefaultCharset UTF-8
+
+# 디렉터리 목록 노출 금지
+Options -Indexes
+
+# --- 404 페이지 ---
+ErrorDocument 404 /404.html
+
+# --- URL 정리 ---
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # HTTPS 강제 (SSL 적용 후 아래 3줄의 # 을 제거하세요)
+  # RewriteCond %{HTTPS} !=on
+  # RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  # RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+  # www 통일 (www 없이 접속 시 www 로 이동 — 필요 없으면 주석 처리)
+  # RewriteCond %{HTTP_HOST} ^creaton\.kr$ [NC]
+  # RewriteRule ^(.*)$ https://www.creaton.kr/$1 [R=301,L]
+
+  # /about 처럼 슬래시 없이 들어와도 폴더의 index.html 을 서빙
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*)$ /$1/index.html [L]
+</IfModule>
+
+# --- Gzip 압축 (로딩 속도) ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# --- 브라우저 캐시 ---
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # 해시 파일명이 붙는 빌드 산출물 · 이미지 · 폰트: 1년
+  ExpiresByType text/css                "access plus 1 year"
+  ExpiresByType application/javascript  "access plus 1 year"
+  ExpiresByType image/jpeg              "access plus 1 year"
+  ExpiresByType image/png               "access plus 1 year"
+  ExpiresByType image/webp              "access plus 1 year"
+  ExpiresByType image/svg+xml           "access plus 1 year"
+  ExpiresByType font/woff2              "access plus 1 year"
+
+  # HTML: 매번 최신 확인 (콘텐츠 수정이 바로 반영되도록)
+  ExpiresByType text/html               "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # 보안 헤더
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # HTML 은 캐시하지 않음
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  # 정적 자산은 장기 캐시
+  <FilesMatch "\.(css|js|jpg|jpeg|png|webp|svg|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# --- MIME 타입 보정 ---
+<IfModule mod_mime.c>
+  AddType image/svg+xml .svg
+  AddType application/font-woff2 .woff2
+  AddType application/xml .xml
+</IfModule>
