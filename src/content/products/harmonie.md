@@ -41,11 +41,6 @@ specs:
 gallery:
   - "/images/products/harmonie/case-1.jpg"
   - "/images/products/harmonie/case-2.jpg"
-  - "/images/products/harmonie/case-3.jpg"
-  - "/images/products/harmonie/case-4.jpg"
-  - "/images/products/harmonie/case-5.jpg"
-  - "/images/products/harmonie/case-6.jpg"
-  - "/images/products/harmonie/case-7.jpg"
 draft: false
 ---
 
