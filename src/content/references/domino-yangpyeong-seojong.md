@@ -4,9 +4,6 @@ location: "경기도 양평 서종"
 buildingType: "전원주택"
 product: "DOMINO 도미노"
 image: "/images/references/domino-yangpyeong-seojong/img-1.jpg"
-gallery:
-  - "/images/references/domino-yangpyeong-seojong/img-1.jpg"
-  - "/images/references/domino-yangpyeong-seojong/img-2.jpg"
 order: 2
 draft: false
 ---
